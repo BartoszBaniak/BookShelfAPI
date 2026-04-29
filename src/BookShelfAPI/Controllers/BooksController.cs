@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShelfAPI.Controllers;
 
 [ApiController]
-[Route("books")]
+[Route("api/books")]
 public class BooksController(
     ICommandHandler<CreateBookCommand, Guid> createBookHandler,
     IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
