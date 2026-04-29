@@ -5,6 +5,7 @@ using BookShelfAPI.Application.Books.Create;
 using BookShelfAPI.Application.Books.Delete;
 using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
+using BookShelfAPI.Application.Books.Update;
 using BookShelfAPI.Application.Common;
 using BookShelfAPI.Contracts.Books;
 using BookShelfAPI.Domain.Enums;
@@ -17,6 +18,7 @@ namespace BookShelfAPI.Controllers;
 public class BooksController(
     ICommandHandler<CreateBookCommand, Guid> createBookHandler,
     ICommandHandler<DeleteBookCommand> deleteBookHandler,
+    ICommandHandler<UpdateBookCommand> updateBookHandler,
     IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
     IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler) : ControllerBase
 {
@@ -70,6 +72,24 @@ public class BooksController(
         CancellationToken cancellationToken)
     {
         await deleteBookHandler.HandleAsync(new DeleteBookCommand(id), cancellationToken);
+        return NoContent();
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> Update(
+        [FromRoute] Guid id,
+        [FromBody] UpdateBookRequest request,
+        CancellationToken cancellationToken)
+    {
+        var command = new UpdateBookCommand(
+            id,
+            request.Title,
+            request.Author,
+            request.Isbn,
+            request.PublicationYear,
+            request.Description);
+
+        await updateBookHandler.HandleAsync(command, cancellationToken);
         return NoContent();
     }
 }

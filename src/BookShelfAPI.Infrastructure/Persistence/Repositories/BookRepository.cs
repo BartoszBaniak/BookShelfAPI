@@ -42,6 +42,12 @@ public class BookRepository(BookDbContext db) : IBookRepository
         await db.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task UpdateAsync(Book book, CancellationToken cancellationToken = default)
+    {
+        db.Books.Update(book);
+        await db.SaveChangesAsync(cancellationToken);
+    }
+
     private static IQueryable<Book> ApplyStatusFilter(IQueryable<Book> source, ReadingStatus? status)
     {
         return status.HasValue ? source.Where(b => b.Status == status.Value) : source;

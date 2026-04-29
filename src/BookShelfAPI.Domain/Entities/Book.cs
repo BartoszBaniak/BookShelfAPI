@@ -107,6 +107,22 @@ public class Book
         Isbn = normalized;
     }
 
+    public async Task UpdateCatalogAsync(
+        string title,
+        string author,
+        string? isbn,
+        int? publicationYear,
+        string? description,
+        IBookIsbnUniquenessChecker isbnUniquenessChecker,
+        CancellationToken cancellationToken = default)
+    {
+        SetTitle(title);
+        SetAuthor(author);
+        await ChangeIsbnAsync(isbn, isbnUniquenessChecker, cancellationToken);
+        SetPublicationYear(publicationYear);
+        SetDescription(description);
+    }
+
     public void SetPublicationYear(int? year)
     {
         if (year is null)
