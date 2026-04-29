@@ -2,6 +2,7 @@
 
     <ItemGroup>
       <ProjectReference Include="BookShelfAPI.Domain\BookShelfAPI.Domain.csproj" />
+      <ProjectReference Include="BookShelfAPI.Application\BookShelfAPI.Application.csproj" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -10,7 +11,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <DefaultItemExcludes>$(DefaultItemExcludes);BookShelfAPI.Domain\**</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);BookShelfAPI.Domain\**;BookShelfAPI.Application\**</DefaultItemExcludes>
     </PropertyGroup>
 
 </Project>
