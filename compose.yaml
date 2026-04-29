@@ -1,7 +1,26 @@
-﻿services:
-  bookshelfapi:
-    image: bookshelfapi
+services:
+  migrator:
     build:
       context: .
-      dockerfile: Dockerfile
+      target: migrator
+    environment:
+      ConnectionStrings__BookShelfDb: Data Source=/data/bookshelf.db
+    volumes:
+      - bookshelf-data:/data
 
+  api:
+    build:
+      context: .
+      target: runtime
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__BookShelfDb: Data Source=/data/bookshelf.db
+    volumes:
+      - bookshelf-data:/data
+    depends_on:
+      migrator:
+        condition: service_completed_successfully
+
+volumes:
+  bookshelf-data:
