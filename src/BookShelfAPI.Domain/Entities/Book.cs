@@ -201,7 +201,7 @@ public class Book
     {
         var isUnique = await checker.IsUniqueAsync(isbn, cancellationToken);
         if (!isUnique)
-            throw new DomainException("ISBN must be unique across the library.");
+            throw new ConflictException("ISBN must be unique across the library.");
     }
 
     private static bool IsValidIsbn13(string digits)
