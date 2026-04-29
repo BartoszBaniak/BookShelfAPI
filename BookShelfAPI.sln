@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI", "BookShelfAPI.csproj", "{CBBDE006-04EB-4906-AA25-AD6BED7C2F1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI", "src\BookShelfAPI\BookShelfAPI.csproj", "{CBBDE006-04EB-4906-AA25-AD6BED7C2F1B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C1B0B953-0EEC-43AD-96CE-2EB2AB7FE6E2}"
 	ProjectSection(SolutionItems) = preProject
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Domain", "BookShelfAPI.Domain\BookShelfAPI.Domain.csproj", "{98E79D07-D71E-4B77-A725-2A853DCF976D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Domain", "src\BookShelfAPI.Domain\BookShelfAPI.Domain.csproj", "{98E79D07-D71E-4B77-A725-2A853DCF976D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Application", "BookShelfAPI.Application\BookShelfAPI.Application.csproj", "{EDE951A6-A119-4E61-B7FF-26640BA2069E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Application", "src\BookShelfAPI.Application\BookShelfAPI.Application.csproj", "{EDE951A6-A119-4E61-B7FF-26640BA2069E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Infrastructure", "BookShelfAPI.Infrastructure\BookShelfAPI.Infrastructure.csproj", "{066035C8-E1A9-42BF-A894-FB44F534D2AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShelfAPI.Infrastructure", "src\BookShelfAPI.Infrastructure\BookShelfAPI.Infrastructure.csproj", "{066035C8-E1A9-42BF-A894-FB44F534D2AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

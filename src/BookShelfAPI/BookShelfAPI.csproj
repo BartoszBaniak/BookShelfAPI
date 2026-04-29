@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="BookShelfAPI.Application\BookShelfAPI.Application.csproj" />
+      <ProjectReference Include="..\BookShelfAPI.Application\BookShelfAPI.Application.csproj" />
     </ItemGroup>
 
     <PropertyGroup>
@@ -10,7 +10,6 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <DefaultItemExcludes>$(DefaultItemExcludes);BookShelfAPI.Domain\**;BookShelfAPI.Application\**;BookShelfAPI.Infrastructure\**</DefaultItemExcludes>
     </PropertyGroup>
 
 </Project>
