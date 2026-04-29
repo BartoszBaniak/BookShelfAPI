@@ -1,4 +1,7 @@
 using BookShelfAPI.Application;
+using BookShelfAPI.Application.Common;
+using BookShelfAPI.Domain.Repositories;
+using BookShelfAPI.Domain.Services;
 using BookShelfAPI.Infrastructure;
 using BookShelfAPI.Middleware;
 
@@ -33,6 +36,14 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.MapControllers();
+
+if (app.Configuration.GetValue("SeedData", true))
+{
+    using var scope = app.Services.CreateScope();
+    var repository = scope.ServiceProvider.GetRequiredService<IBookRepository>();
+    var isbnChecker = scope.ServiceProvider.GetRequiredService<IBookIsbnUniquenessChecker>();
+    await BookSeeder.SeedAsync(repository, isbnChecker);
+}
 
 app.Run();
 
