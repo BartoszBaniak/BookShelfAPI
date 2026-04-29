@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-      <ProjectReference Include="BookShelfAPI.Domain\BookShelfAPI.Domain.csproj" />
       <ProjectReference Include="BookShelfAPI.Application\BookShelfAPI.Application.csproj" />
     </ItemGroup>
 
