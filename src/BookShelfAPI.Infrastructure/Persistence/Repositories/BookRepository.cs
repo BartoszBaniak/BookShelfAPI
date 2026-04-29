@@ -36,6 +36,12 @@ public class BookRepository(BookDbContext db) : IBookRepository
         return await ApplyStatusFilter(db.Books, status).CountAsync(cancellationToken);
     }
 
+    public async Task DeleteAsync(Book book, CancellationToken cancellationToken = default)
+    {
+        db.Books.Remove(book);
+        await db.SaveChangesAsync(cancellationToken);
+    }
+
     private static IQueryable<Book> ApplyStatusFilter(IQueryable<Book> source, ReadingStatus? status)
     {
         return status.HasValue ? source.Where(b => b.Status == status.Value) : source;

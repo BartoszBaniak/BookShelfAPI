@@ -16,4 +16,6 @@ public interface IBookRepository
         CancellationToken cancellationToken = default);
 
     Task<int> CountAsync(ReadingStatus? status, CancellationToken cancellationToken = default);
+
+    Task DeleteAsync(Book book, CancellationToken cancellationToken = default);
 }

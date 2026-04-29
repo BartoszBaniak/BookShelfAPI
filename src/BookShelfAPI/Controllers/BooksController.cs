@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using BookShelfAPI.Application.Abstractions;
 using BookShelfAPI.Application.Books;
 using BookShelfAPI.Application.Books.Create;
+using BookShelfAPI.Application.Books.Delete;
 using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
 using BookShelfAPI.Application.Common;
@@ -15,6 +16,7 @@ namespace BookShelfAPI.Controllers;
 [Route("api/books")]
 public class BooksController(
     ICommandHandler<CreateBookCommand, Guid> createBookHandler,
+    ICommandHandler<DeleteBookCommand> deleteBookHandler,
     IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
     IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler) : ControllerBase
 {
@@ -60,5 +62,14 @@ public class BooksController(
     {
         var dto = await getBookByIdHandler.HandleAsync(new GetBookByIdQuery(id), cancellationToken);
         return Ok(dto);
+    }
+
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> Delete(
+        [FromRoute] Guid id,
+        CancellationToken cancellationToken)
+    {
+        await deleteBookHandler.HandleAsync(new DeleteBookCommand(id), cancellationToken);
+        return NoContent();
     }
 }
