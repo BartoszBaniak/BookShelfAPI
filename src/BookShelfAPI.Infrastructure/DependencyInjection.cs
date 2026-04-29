@@ -1,3 +1,4 @@
+using BookShelfAPI.Domain.Queries;
 using BookShelfAPI.Domain.Repositories;
 using BookShelfAPI.Domain.Services;
 using BookShelfAPI.Infrastructure.Persistence;
@@ -14,6 +15,7 @@ public static class DependencyInjection
         services.AddDbContext<BookDbContext>(options => options.UseSqlite(connectionString));
         services.AddScoped<IBookRepository, BookRepository>();
         services.AddScoped<IBookIsbnUniquenessChecker, BookIsbnUniquenessChecker>();
+        services.AddScoped<IBookStatisticsReader, BookStatisticsReader>();
         return services;
     }
 }

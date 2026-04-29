@@ -7,10 +7,12 @@ using BookShelfAPI.Application.Books.Delete;
 using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
 using BookShelfAPI.Application.Books.SetRating;
+using BookShelfAPI.Application.Books.Statistics;
 using BookShelfAPI.Application.Books.Update;
 using BookShelfAPI.Application.Common;
 using BookShelfAPI.Contracts.Books;
 using BookShelfAPI.Domain.Enums;
+using BookShelfAPI.Domain.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShelfAPI.Controllers;
@@ -24,7 +26,8 @@ public class BooksController(
     ICommandHandler<ChangeBookStatusCommand> changeBookStatusHandler,
     ICommandHandler<SetBookRatingCommand> setBookRatingHandler,
     IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
-    IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler) : ControllerBase
+    IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler,
+    IQueryHandler<GetStatisticsQuery, BookStatistics> getStatisticsHandler) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -68,6 +71,13 @@ public class BooksController(
     {
         var dto = await getBookByIdHandler.HandleAsync(new GetBookByIdQuery(id), cancellationToken);
         return Ok(dto);
+    }
+
+    [HttpGet("statistics")]
+    public async Task<ActionResult<BookStatistics>> GetStatistics(CancellationToken cancellationToken)
+    {
+        var stats = await getStatisticsHandler.HandleAsync(new GetStatisticsQuery(), cancellationToken);
+        return Ok(stats);
     }
 
     [HttpDelete("{id:guid}")]

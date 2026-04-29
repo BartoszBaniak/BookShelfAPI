@@ -6,8 +6,10 @@ using BookShelfAPI.Application.Books.Delete;
 using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
 using BookShelfAPI.Application.Books.SetRating;
+using BookShelfAPI.Application.Books.Statistics;
 using BookShelfAPI.Application.Books.Update;
 using BookShelfAPI.Application.Common;
+using BookShelfAPI.Domain.Queries;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BookShelfAPI.Application;
@@ -23,6 +25,7 @@ public static class DependencyInjection
         services.AddScoped<ICommandHandler<SetBookRatingCommand>, SetBookRatingHandler>();
         services.AddScoped<IQueryHandler<GetBookByIdQuery, BookDto>, GetBookByIdHandler>();
         services.AddScoped<IQueryHandler<GetBooksQuery, PagedResult<BookDto>>, GetBooksHandler>();
+        services.AddScoped<IQueryHandler<GetStatisticsQuery, BookStatistics>, GetStatisticsHandler>();
         return services;
     }
 }
