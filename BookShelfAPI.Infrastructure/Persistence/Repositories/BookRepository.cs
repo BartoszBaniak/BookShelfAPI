@@ -1,5 +1,5 @@
-using BookShelfAPI.Application.Repositories;
 using BookShelfAPI.Domain.Entities;
+using BookShelfAPI.Domain.Repositories;
 
 namespace BookShelfAPI.Infrastructure.Persistence.Repositories;
 

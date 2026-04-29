@@ -1,6 +1,6 @@
 using BookShelfAPI.Domain.Entities;
 
-namespace BookShelfAPI.Application.Repositories;
+namespace BookShelfAPI.Domain.Repositories;
 
 public interface IBookRepository
 {

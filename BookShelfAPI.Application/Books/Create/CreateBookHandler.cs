@@ -1,6 +1,6 @@
 using BookShelfAPI.Application.Abstractions;
-using BookShelfAPI.Application.Repositories;
 using BookShelfAPI.Domain.Entities;
+using BookShelfAPI.Domain.Repositories;
 using BookShelfAPI.Domain.Services;
 
 namespace BookShelfAPI.Application.Books.Create;

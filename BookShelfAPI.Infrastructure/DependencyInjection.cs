@@ -1,4 +1,4 @@
-using BookShelfAPI.Application.Repositories;
+using BookShelfAPI.Domain.Repositories;
 using BookShelfAPI.Domain.Services;
 using BookShelfAPI.Infrastructure.Persistence;
 using BookShelfAPI.Infrastructure.Persistence.Repositories;
