@@ -1,0 +1,7 @@
+﻿services:
+  bookshelfapi:
+    image: bookshelfapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+
