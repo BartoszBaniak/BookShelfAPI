@@ -10,7 +10,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <DefaultItemExcludes>$(DefaultItemExcludes);BookShelfAPI.Domain\**;BookShelfAPI.Application\**</DefaultItemExcludes>
+        <DefaultItemExcludes>$(DefaultItemExcludes);BookShelfAPI.Domain\**;BookShelfAPI.Application\**;BookShelfAPI.Infrastructure\**</DefaultItemExcludes>
     </PropertyGroup>
 
 </Project>
