@@ -17,6 +17,7 @@ public class DomainExceptionHandler : IExceptionHandler
 
         var (statusCode, title) = domainException switch
         {
+            NotFoundException => (StatusCodes.Status404NotFound, "Not found"),
             ConflictException => (StatusCodes.Status409Conflict, "Conflict"),
             _ => (StatusCodes.Status422UnprocessableEntity, "Unprocessable entity"),
         };

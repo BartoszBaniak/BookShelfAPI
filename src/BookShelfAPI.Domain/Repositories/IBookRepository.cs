@@ -5,4 +5,6 @@ namespace BookShelfAPI.Domain.Repositories;
 public interface IBookRepository
 {
     Task AddAsync(Book book, CancellationToken cancellationToken = default);
+
+    Task<Book?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 }
