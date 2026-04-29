@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using BookShelfAPI.Application.Abstractions;
 using BookShelfAPI.Application.Books;
+using BookShelfAPI.Application.Books.ChangeStatus;
 using BookShelfAPI.Application.Books.Create;
 using BookShelfAPI.Application.Books.Delete;
 using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
+using BookShelfAPI.Application.Books.SetRating;
 using BookShelfAPI.Application.Books.Update;
 using BookShelfAPI.Application.Common;
 using BookShelfAPI.Contracts.Books;
@@ -19,6 +21,8 @@ public class BooksController(
     ICommandHandler<CreateBookCommand, Guid> createBookHandler,
     ICommandHandler<DeleteBookCommand> deleteBookHandler,
     ICommandHandler<UpdateBookCommand> updateBookHandler,
+    ICommandHandler<ChangeBookStatusCommand> changeBookStatusHandler,
+    ICommandHandler<SetBookRatingCommand> setBookRatingHandler,
     IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
     IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler) : ControllerBase
 {
@@ -90,6 +94,30 @@ public class BooksController(
             request.Description);
 
         await updateBookHandler.HandleAsync(command, cancellationToken);
+        return NoContent();
+    }
+
+    [HttpPatch("{id:guid}/status")]
+    public async Task<IActionResult> ChangeStatus(
+        [FromRoute] Guid id,
+        [FromBody] ChangeBookStatusRequest request,
+        CancellationToken cancellationToken)
+    {
+        await changeBookStatusHandler.HandleAsync(
+            new ChangeBookStatusCommand(id, request.Status),
+            cancellationToken);
+        return NoContent();
+    }
+
+    [HttpPatch("{id:guid}/rating")]
+    public async Task<IActionResult> SetRating(
+        [FromRoute] Guid id,
+        [FromBody] SetBookRatingRequest request,
+        CancellationToken cancellationToken)
+    {
+        await setBookRatingHandler.HandleAsync(
+            new SetBookRatingCommand(id, request.Rating),
+            cancellationToken);
         return NoContent();
     }
 }
