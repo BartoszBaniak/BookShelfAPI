@@ -1,8 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using BookShelfAPI.Application.Abstractions;
 using BookShelfAPI.Application.Books;
 using BookShelfAPI.Application.Books.Create;
+using BookShelfAPI.Application.Books.GetAll;
 using BookShelfAPI.Application.Books.GetById;
+using BookShelfAPI.Application.Common;
 using BookShelfAPI.Contracts.Books;
+using BookShelfAPI.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookShelfAPI.Controllers;
@@ -11,7 +15,8 @@ namespace BookShelfAPI.Controllers;
 [Route("books")]
 public class BooksController(
     ICommandHandler<CreateBookCommand, Guid> createBookHandler,
-    IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler) : ControllerBase
+    IQueryHandler<GetBookByIdQuery, BookDto> getBookByIdHandler,
+    IQueryHandler<GetBooksQuery, PagedResult<BookDto>> getBooksHandler) : ControllerBase
 {
     [HttpPost]
     public async Task<IActionResult> Create(
@@ -32,6 +37,20 @@ public class BooksController(
         var id = await createBookHandler.HandleAsync(command, cancellationToken);
 
         return CreatedAtAction(nameof(GetById), new { id }, new CreateBookResponse(id));
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<PagedResult<BookDto>>> Get(
+        [FromQuery, Range(1, int.MaxValue)] int page = 1,
+        [FromQuery, Range(1, 100)] int pageSize = 20,
+        [FromQuery] ReadingStatus? status = null,
+        CancellationToken cancellationToken = default)
+    {
+        var result = await getBooksHandler.HandleAsync(
+            new GetBooksQuery(page, pageSize, status),
+            cancellationToken);
+
+        return Ok(result);
     }
 
     [HttpGet("{id:guid}")]
